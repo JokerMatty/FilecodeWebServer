@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="zhuyaohui" />
+<title>DMR申请</title>
+<link rel="stylesheet" href="./css/test.css">
+<link rel="stylesheet" href="./css/quick_layout-min.css">
+<style>
+.error { box-shadow: 0 0 10px #ff4136; }
+</style>
+</head>
+<body>
+<div class="zxx_out_box">
+    <div class="zxx_in_box">
+        <h1 class="zxx_title">DMR文件号 申请表单</h1>
+        <div class="zxx_main_con">
+			<form id="testForm" action="5CGISQL.cgi" method="post">
+                <div class="mb15"><label for="name">编制人：</label><input type="text" name="author" id="name" maxlength="10" required /><span class="f9 g6 ml10">请输入编制人</span></div>
+                
+                <div class="mb15">产品代号：<select type="text" name="mark" id="sel1" onchange="selectProv()" required>
+                    <option value="">请选择</option>
+                    <option value="HLP1">HLP1 内窥镜手术器械控制系统</option>
+                    <option value="HLP2">HLP2 内窥镜手术器械控制系统配套用无菌保护套</option>
+                    <option value="HLP3">HLP3 内窥镜手术器械控制系统配套用手术器械</option>
+                    <option value="HLP4">HLP4 穿刺器</option>
+                    <option value="HLN1">HLN1 柔性内窥镜手术系统</option>
+                    <option value="HWK1">HWK1 三维电子腹腔内窥镜</option>
+                    <option value="HWK2">HWK2 三位电子内窥镜图像处理器及冷光源</option>
+                    <option value="RNV">RNV (STM、设备操作规范)</option>
+                </select><span class="f9 g6 ml10">请选择产品代号</span></div>
+
+                <div class="mb15">文件分类：<select type="text" name="type" id="sel2" required>
+                    <option value="">请选择</option>
+                </select><span class="f9 g6 ml10">请选择文件分类</span></div>
+
+                <div class="mb15"><label for="filename">文件名：</label><input type="text" name="filename" id="filename" class="filename" maxlength="50" required /><br/>
+                <span class="f9 g6 ml10">请输入文件名</span></div>
+                <input type="submit" class="submit" value="提交生成" disabled />
+            </form>    
+            <div class="DMRCSS">
+                <span><font size="4"><strong>示例：</strong></font></span><br/>
+                <span><font size="3">HLP1-QP-0036 腹腔内窥镜手术器械控制系统集成调试作业指导书</font></span><br/>
+                <span><font size="3">HLP2-PQC-0002 通用无菌保护套组装过程检验指导书</font></span><br/>
+                <span><font size="3">HLP3-PQC-0011 5mm手术器械激光打标过程检验指导书</font></span><br/>
+                <span><font size="3">HLP4-IQC-0011 	密封件盖10-12  IQC检验规范</font></span><br/>
+                <span><font size="3">RNV-STM-0036 器械无菌适配器与IDU适配件连接牢固度标准测试方法 </font></span><br/>
+                <span><font size="3">RNV-HLP-DD-010	患者手术平台子系统详细设计规格书</font></span><br/>
+                <span><font size="3">RNV-QC-0026 高频耐压测试仪设备操作规范</font></span><br/>
+            </div>         
+        </div>
+    </div>
+</div>
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery-html5Validate2.js"></script>
+<script>
+    $("#testForm").html5Validate(function() {
+        //alert("全部通过！");
+        this.submit();	
+    }, {
+        // novalidate: false,
+        // labelDrive: false
+    });
+
+
+    var arrs1 = ["QP","STM","QC"];
+    var arrs2 = ["QP 生产工艺类","STM 标准测试方法类","QC 检验类"];
+    var arrs3 = ["IQC","PQC","FQC","QP","DQ","QD","QT","QS","QM","QP","STM","QC"];
+    var arrs4 = ["IQC 进厂检验类","PQC 过程检验类","FQC 成品检验类","QP 生产工艺类","DQ 质量标准类","QD 研发类","QT 技术要求类","QS 服务类","QM 市场/销售类","QP 生产工艺类","STM 标准测试方法类","QC 检验类"];
+    function selectProv(){
+	    var provinceIndex = document.getElementById('sel1').value;
+	    var str = "<option value=''>请选择</option>";
+	    if(provinceIndex=="RNV"){		
+		    for(var i = 0; i < arrs1.length; i++)
+			    str += "<option value='"+arrs1[i]+"'>"+ arrs2[i] +"</option>";
+	    }
+        else{
+            for(var i = 0; i < arrs3.length; i++)
+			    str += "<option value='"+arrs3[i]+"'>"+ arrs4[i] +"</option>";
+        }
+	    document.getElementById("sel2").innerHTML = str;
+    }
+
+</script>
+</body>
+</html>

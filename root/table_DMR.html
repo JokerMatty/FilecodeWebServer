@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    <title>DMR Table</title>
+    <meta name="author" content="Derek Eder">
+    <meta content="Display any CSV file as a searchable, filterable, pretty HTML table">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="./css/buttons.dataTables.min.css">
+    <link rel="stylesheet" href="./css/select.dataTables.min.css">
+    <link rel="stylesheet" href="./css/select.bootstrap4.min.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <main class="row">
+            <div class="col">
+                <h1 align="center"><strong>DMR文件号 汇总表</strong></h1> 
+                <div id="table-container"></div>
+            </div>
+        </main>
+    </div>
+    <script type="text/javascript" src="./js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="./js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.csv.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="./js/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" src="./js/csv_to_html_table.js"></script>
+    <script type="text/javascript" src="./js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="./js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="./js/jquery-html5Validate.js"></script>
+    <script type="text/javascript" src="./js/dataTables.select.min.js"></script>
+    <script type="text/javascript">
+        function format_link(link) {
+            if (link)
+                return "<a href='" + link + "' target='_blank'>" + link + "</a>";
+            else return "";
+        }
+
+        CsvToHtmlTable.init({
+            csv_path: "./data_from_mysql/DMR.csv",
+            element: "table-container",
+            allow_download: true,
+            csv_options: {
+                separator: ",",
+                delimiter: '"'
+            },
+            datatables_options: {
+                paging: true,
+                select:true,
+                order: [[ 0, 'desc' ]],
+                pageLength: 15,
+                lengthMenu: [ 15, 30, 50, 75, 100 ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel',
+                    {
+                        text: '！删除！',
+                        action: function ( e, dt, node, config ) {
+                            let executeOperation = false;
+                            if (confirm("确认删除文件号："+dt.row( { selected: true } ).data()[5])) {
+                                executeOperation = true;
+                            }
+                            if (executeOperation) {
+                                $.post("0CGISQL.cgi",
+                                {
+                                    filecode:dt.row( { selected: true } ).data()[5],
+                                },
+                                function(data,status){
+                                    if(status == "success"){
+                                        alert(data);
+                                    }
+                                    else{
+                                        alert("操作失败");
+                                    }
+                                    document.location.href='./8.html'
+                                });
+                            } else {}
+                        },
+                        enabled: true
+                    }
+
+                ],
+                dom: "<'row'<'#btn_add.col-md-0'><'col-md-7'B><'col-md-3'f>r<'col-md-2 text-right'l>>t<'row'<'col-md-6'i><'col-md-6 text-right'p>>",
+            },
+        });
+    </script>
+</body>
+
+</html>

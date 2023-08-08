@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="zhuyaohui" />
+<title>DHF申请</title>
+
+<link rel="stylesheet" href="./css/test.css">
+<link rel="stylesheet" href="./css/quick_layout-min.css">
+
+
+<style>
+.error { box-shadow: 0 0 10px #ff4136; }
+</style>
+</head>
+<body>
+<div class="zxx_out_box">
+    <div class="zxx_in_box">
+        <h1 class="zxx_title">DHF文件号 申请表单</h1>
+        <div class="zxx_main_con">
+			<form id="testForm" action="4CGISQL.cgi" method="post">
+                <div class="mb15"><label for="name">编制人：</label><input type="text" name="author" id="name" maxlength="10" required /><span class="f9 g6 ml10">请输入编制人</span></div>
+                <div class="mb15">产品开发阶段：<select type="text" name="stage" required>
+                    <option value="">请选择</option>
+                    <option value="M1">M1</option>
+                    <option value="M2">M2</option>
+                    <option value="M3">M3</option>
+                    <option value="M4">M4</option>
+                    <option value="M5">M5</option>
+                    <option value="M6">M6</option>
+                    <option value="M7">M7</option>
+                    <option value="M8">M8</option>
+                    <option value="M9">M9</option>
+                    <option value="M10">M10</option>
+                    <option value="M11">M11</option>
+                </select><span class="f9 g6 ml10">请选择产品开发阶段</span></div>
+
+                <div class="mb15">项目代号：<select type="text" name="mark" required>
+                    <option value="">请选择</option>
+                    <option value="HLP">HLP</option>
+                    <option value="HWK">HWK</option>
+                    <option value="NEO">NEO</option>
+                </select><span class="f9 g6 ml10">请选择项目代号</span></div>
+
+                <div class="mb15">文件类别：<select type="text" name="type" required>
+                    <option value="">请选择</option>
+                    <option value="DP">DP 策划类文档</option>
+                    <option value="DR">DR 需求类文档</option>
+                    <option value="DD">DD 设计类文档</option>
+                    <option value="DV">DV 设计验证类文档</option>
+                    <option value="DE">DE 工艺类文档</option>
+                    <option value="DG">DG 通用类文档</option>
+                    <option value="DB">DB 采购类文档</option>
+                    <option value="DS">DS 服务类文档</option>
+                </select><span class="f9 g6 ml10">请选择文件类别</span></div>
+                <div class="mb15"><label for="filename">文件名：</label><input type="text" name="filename" id="filename" class="filename" maxlength="50" required /><br/>
+                <span class="f9 g6 ml10">请输入文件名</span></div>
+                <input type="submit" class="submit" value="提交生成" disabled />
+            </form> 
+            <div class="DHFCSS">
+                <span><font size="4"><strong>说明：</strong></font></span><br/>
+                <span><font size="3">DP策划类文档包括：立项开发建议书、产品注册策略和计划、产品开发计划等;</font></span><br/>
+                <span><font size="3">DR 需求类文档：临床需求、用户需求规范、（子）系统需求规范、需求规格书等;/font></span><br/>
+                <span><font size="3">DD设计类文档：详细设计规格书、产品风险管理报告、DFMEA、UFMEA等;</font></span><br/>
+                <span><font size="3">DV设计验证类文档：设计评审报告、测试用例、测试方案、测试报告、设计验证方案、设计验证报告、零件评价记录单等;</font></span><br/>
+                <span><font size="3">DE 工艺类文档：过程确认方案/报告、设备安装确认方案/报告、工艺验证方案/报告等;</font></span><br/>
+                <span><font size="3">DS 服务类文档：产品维护服务方案。</font></span><br/>
+
+                <span><font size="4"><strong>示例：</strong></font></span><br/>
+                <span><font size="3">RNV-HLP-DP-001 	产品立项开发建议书</font></span><br/>
+                <span><font size="3">RNV-HLP-DP-030	腹腔内窥镜手术系统配套用无菌保护套产品注册策略和计划</font></span><br/>
+                <span><font size="3">RNV-HLP-DR-001	内窥镜手术器械控制系统用户需求规范</font></span><br/>
+                <span><font size="3">RNV-HLP-DR-022 TouchText屏幕检测工具用户需求规格书</font></span><br/>
+                <span><font size="3">RNV-HLP-DD-005	产品风险管理报告</font></span><br/>
+                <span><font size="3">RNV-HLP-DD-010	患者手术平台子系统详细设计规格书</font></span><br/>
+                <span><font size="3">RNV-HLP-DV-015	患者手术平台子系统测试方案</font></span><br/>
+                <span><font size="3">RNV-HLP-DV-016	患者手术平台子系统测试报告</font></span><br/>
+                <span><font size="3">RNV-HLP-DV-403	密封件鲁尔阀材料变更零件评价记录单（CR-230426-01）</font></span><br/>
+                <span><font size="3">RNV-HLP-DE-008	穿刺器清洗烘干过程确认主方案</font></span><br/>
+                <span><font size="3">RNV-HLP-DE-009	穿刺器清洗烘干过程确认OQ报告（CR-230426-01）</font></span><br/>
+            </div>       
+        </div>
+    </div>
+</div>
+
+
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery-html5Validate2.js"></script>
+
+<script>
+    $("#testForm").html5Validate(function() {
+        //alert("全部通过！");
+        this.submit();	
+    }, {
+        // novalidate: false,
+        // labelDrive: false
+    });
+
+ </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="author" content="zhuyaohui" />
+<title>不合格品单</title>
+<link rel="stylesheet" href="./css/test.css">
+<link rel="stylesheet" href="./css/quick_layout-min.css">
+<style>
+.error { box-shadow: 0 0 10px #ff4136; }
+</style>
+</head>
+<body>
+<div class="zxx_out_box">
+    <div class="zxx_in_box">
+        <h1 class="zxx_title">不合格品单号 申请表单</h1>
+        <div class="zxx_main_con">
+			<form id="testForm" action="6CGISQL.cgi" method="post">
+                <div class="mb15"><label for="name">申请人：</label><input type="text" name="author" id="name" maxlength="10" required /><span class="f9 g6 ml10">请输入申请人</span></div>
+                <div class="mb15">产品代号：<select type="text" name="mark" required>
+                    <option value="">请选择</option>
+                    <option value="HLP1">HLP1 内窥镜手术器械控制系统</option>
+                    <option value="HLP2">HLP2 内窥镜手术器械控制系统配套用无菌保护套</option>
+                    <option value="HLP3">HLP3 内窥镜手术器械控制系统配套用手术器械</option>
+                    <option value="HLP4">HLP4 穿刺器</option>
+                    <option value="HLN1">HLN1 柔性内窥镜手术系统</option>
+                    <option value="HWK1">HWK1 三维电子腹腔内窥镜</option>
+                    <option value="HWK2">HWK2 三位电子内窥镜图像处理器及冷光源</option>
+                </select><span class="f9 g6 ml10">请选择产品代号</span></div>
+                <div class="mb15">不合格确认处：<select type="text" name="unpassstage" required>
+                    <option value="">请选择</option>
+                    <option value="IQC">IQC进厂检验</option>
+                    <option value="PQC">PQC过程检验</option>
+                    <option value="FQC">FQC出厂检验</option>
+                    <option value="DOA">DOA客户处</option>
+                </select><span class="f9 g6 ml10">请选择不合格确认处</span></div>
+
+                <input type="submit" class="submit" value="提交生成" disabled />
+            </form> 
+            <div class="SQPCSS">
+                <span><font size="4"><strong>示例：</strong></font></span><br/>
+                <span><font size="3">NCF-IQC-230509001 </font></span><br/>
+                <span><font size="3">NCF-FQC-221201099 </font></span><br/>
+            </div>           
+        </div>
+    </div>
+</div>
+<script src="./js/jquery.min.js"></script>
+<script src="./js/jquery-html5Validate2.js"></script>
+
+<script>
+    $("#testForm").html5Validate(function() {
+        //alert("全部通过！");
+        this.submit();	
+    }, {
+        // novalidate: false,
+        // labelDrive: false
+    });
+
+    </script>
+</body>
+</html>
