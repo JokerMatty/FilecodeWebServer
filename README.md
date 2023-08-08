@@ -2,14 +2,14 @@
 
 ## 部署操作
 
-### 创建数据库 filecodeserver
+### （1）创建数据库 filecodeserver
 CREATE DATABASE filecodeserver;
 
-### 使用数据库
+### （2）使用数据库
 use filecodeserver
 
 
-### 创建相关表7个
+### （3）创建相关表7个
 CREATE TABLE `DHF`(
 `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
 `author` VARCHAR(100) NOT NULL,
@@ -84,7 +84,7 @@ PRIMARY KEY(`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-### 初始化数据库，（因为用于不合品文件号生成 需要依赖4个分表中id最大的记录，因此需要另外在这4个表中插入一个初始数据）
+### （4）初始化数据库，（因为用于不合品文件号生成 需要依赖4个分表中id最大的记录，因此需要另外在这4个表中插入一个初始数据）
 
 #### 1.针对DHF、DMR设置主键初始值（300替换为各个类型文件号  需要的生成的第一个的数字尾号）
 ALTER TABLE DHF AUTO_INCREMENT=300;
@@ -103,16 +103,16 @@ INSERT INTO SQP_DOA(author, mark, unpassstage, code, date) VALUES("朱耀辉", "
     ./server
 
 ## 初始化操作
-### 连接服务器
+### （1）连接服务器
 ssh ronovo@192.168.12.108  pass123
-### 登入mysql
+### （2）登入mysql
 mysql -u root -p
 Ronovo.1234567890
-### 切换数据库
+### （3）切换数据库
 use filecodeserver
 
 
-### 初始化数据库，（因为用于不合品文件号生成 需要依赖4个分表中id最大的记录，因此需要另外在这4个表中插入一个初始数据）
+### （4）初始化数据库，（因为用于不合品文件号生成 需要依赖4个分表中id最大的记录，因此需要另外在这4个表中插入一个初始数据）
 #### 1.清空表，主键初始化
 truncate table DHF;
 truncate table DMR;
